@@ -4,18 +4,18 @@ public class MyFirst {
 
   public static void main(String[] args) {
 
-// Примеры из лекций
+/* Примеры из лекций
     Square s = new Square(5);
     System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
 
     Rectangle r = new Rectangle(4, 6);
     System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
+*/
 
 // Задание 2. Вычисление расстояния между двумя точками
     Point a = new Point (2,2);
     Point b = new Point (2,5);
-    System.out.println("Расстояние между двумя точками: " + Point.distance(a, b));
-
+    System.out.println("Расстояние между двумя точками: " + a.distance(b));
   }
 
 // Функция вычисления расстояния
