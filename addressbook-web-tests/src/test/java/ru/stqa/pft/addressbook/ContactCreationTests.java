@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class ContactCreationTests {
   private WebDriver dw;
 
-  @BeforeClass(alwaysRun = true)
+  @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     dw = new FirefoxDriver();
     dw.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -64,7 +64,7 @@ public class ContactCreationTests {
     dw.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
-  @AfterClass(alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     dw.quit();
   }
