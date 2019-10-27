@@ -5,6 +5,7 @@ public class GroupData {
   private final String header;
   private final String footer;
 
+  //конструктор
   public GroupData(String name, String header, String footer) {
     this.name = name;
     this.header = header;

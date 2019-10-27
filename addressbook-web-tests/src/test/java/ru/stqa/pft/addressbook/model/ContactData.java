@@ -8,6 +8,7 @@ public class ContactData {
   private final String city;
   private final String email;
 
+  //конструктор
   public ContactData(String firstName, String lastName, String nickname, String company, String city, String email) {
     this.firstName = firstName;
     this.lastName = lastName;
