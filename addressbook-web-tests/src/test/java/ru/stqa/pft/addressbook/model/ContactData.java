@@ -7,15 +7,17 @@ public class ContactData {
   private final String company;
   private final String city;
   private final String email;
+  private String group;
 
   //конструктор
-  public ContactData(String firstName, String lastName, String nickname, String company, String city, String email) {
+  public ContactData(String firstName, String lastName, String nickname, String company, String city, String email, String group) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.nickname = nickname;
     this.company = company;
     this.city = city;
     this.email = email;
+    this.group = group;
   }
 
   public String getFirstName() {
@@ -40,5 +42,9 @@ public class ContactData {
 
   public String getEmail() {
     return email;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }
