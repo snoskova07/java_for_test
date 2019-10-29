@@ -24,7 +24,7 @@ public class NavigationHelper extends HelperBase {
     {
       return;
     }
-    click(By.linkText("home page"));
+    click(By.xpath("//a[.='home']"));
   }
 
 

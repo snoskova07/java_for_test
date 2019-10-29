@@ -53,4 +53,18 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
+  public void createContact(ContactData contactData, boolean b) {
+      gotoAddNewPage();
+      fillContactForm(new ContactData("Svetlana", "Noskova", "snoskova", "Plesk", "Novosibirsk", "snoskova07@gmail.com", "test1"), true);
+      submitAddAdderssForm();
+  }
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void modifyContact(ContactData contactData, boolean b) {
+        initContactModification();
+        fillContactForm(new ContactData("SvetlanaEdit", "NoskovaEdit", "snoskovaedit", "PleskEdit", "NovosibirskEdit", "snoskova07e@gmail.com", null), false);
+        submitContactModification();
+    }
 }
