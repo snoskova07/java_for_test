@@ -4,8 +4,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import static java.lang.Thread.sleep;
-
 public class ContactDeletionTests extends TestBase {
 
   @Test
