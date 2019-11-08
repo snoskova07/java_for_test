@@ -3,10 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupData;
 import org.testng.annotations.Test;
-
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
@@ -26,6 +23,8 @@ public class GroupModificationTests extends TestBase {
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnToGroupPage();
+
+    //Проверка
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size());
 
@@ -36,5 +35,4 @@ public class GroupModificationTests extends TestBase {
     after.sort(byId);
     Assert.assertEquals(before, after);
   }
-
 }

@@ -38,7 +38,7 @@ public class GroupHelper extends HelperBase {
 
   public void selectGroup(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
-    }
+  }
 
   public void initGroupModification() {
     click(By.name("edit"));
@@ -59,9 +59,9 @@ public class GroupHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-    public int getGroupCount() {
+  public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
-    }
+  }
 
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<GroupData>();

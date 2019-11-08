@@ -6,7 +6,7 @@ public class GroupData {
   private final String header;
   private final String footer;
 
-  //конструктор
+  //конструктор, когда есть id
   public GroupData(int id, String name, String header, String footer) {
     this.id = id;
     this.name = name;
@@ -14,8 +14,8 @@ public class GroupData {
     this.footer = footer;
   }
 
-  //конструктор
-  public GroupData( String name, String header, String footer) {
+  //конструктор, когда нет id
+  public GroupData(String name, String header, String footer) {
     this.id = Integer.MAX_VALUE;
     this.name = name;
     this.header = header;
