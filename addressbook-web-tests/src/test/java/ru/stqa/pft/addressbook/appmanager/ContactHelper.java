@@ -12,65 +12,65 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper(WebDriver wd) {
-        super(wd);
+  public ContactHelper(WebDriver wd) {
+    super(wd);
+  }
+
+  public void fillContactForm(ContactData contactData, boolean creation) {
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("mobile"), contactData.getPhone());
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.getFirstName());
-        type(By.name("lastname"), contactData.getLastName());
-        type(By.name("address"), contactData.getAddress());
-        type(By.name("email"), contactData.getEmail());
-        type(By.name("mobile"), contactData.getPhone());
+  public void submitAddAddressForm() {
+    click(By.xpath("(//input[@name='submit'])[2]"));
+  }
 
-        if (creation) {
-          new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-          Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
-    }
+  public void gotoAddNewPage() {
+    click(By.linkText("add new"));
+  }
 
-    public void submitAddAddressForm() {
-        click(By.xpath("(//input[@name='submit'])[2]"));
-    }
-
-    public void gotoAddNewPage() {
-        click(By.linkText("add new"));
-    }
-
-    public void selectContact(int index) {
+  public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-    public void initContactModification(int index) {
-       // click(By.xpath("//img[@title='Edit']"));
-        wd.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
-    }
+  public void initContactModification(int index) {
+    // click(By.xpath("//img[@title='Edit']"));
+    wd.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
+  }
 
-    public void submitContactModification() {
-        click(By.name("update"));
-    }
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
 
-    public void deleteSelectedContacts() throws InterruptedException {
-        click(By.xpath("//input[@value='Delete']"));
-        wd.switchTo().alert().accept();
-      wd.findElement(By.cssSelector("div.msgbox"));
-      wd.findElement(By.xpath("//table[@id='maintable']"));
-    }
+  public void deleteSelectedContacts() throws InterruptedException {
+    click(By.xpath("//input[@value='Delete']"));
+    wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
+  }
 
   public void createContact(ContactData contactData, boolean b) {
-      gotoAddNewPage();
-      fillContactForm(new ContactData("Svetlana", "Noskova","Novosibirsk", "snoskova07@gmail.com", "1344567", "test1"), true);
-      submitAddAddressForm();
+    gotoAddNewPage();
+    fillContactForm(new ContactData("Svetlana", "Noskova", "Novosibirsk", "snoskova07@gmail.com", "1344567", "test1"), true);
+    submitAddAddressForm();
   }
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
 
-    public void modifyContact(ContactData contactData, boolean b) {
-        fillContactForm(contactData, false);
-        submitContactModification();
-    }
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void modifyContact(ContactData contactData, boolean b) {
+    fillContactForm(contactData, false);
+    submitContactModification();
+  }
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
