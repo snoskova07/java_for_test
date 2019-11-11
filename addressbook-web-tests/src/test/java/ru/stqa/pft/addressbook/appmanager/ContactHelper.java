@@ -51,9 +51,11 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void deleteSelectedContacts() {
+    public void deleteSelectedContacts() throws InterruptedException {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+      wd.findElement(By.cssSelector("div.msgbox"));
+      wd.findElement(By.xpath("//table[@id='maintable']"));
     }
 
   public void createContact(ContactData contactData, boolean b) {

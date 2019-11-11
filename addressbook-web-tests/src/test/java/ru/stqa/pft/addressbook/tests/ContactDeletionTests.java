@@ -8,11 +8,9 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
-
 public class ContactDeletionTests extends TestBase {
 
-  @Test
+  @Test 
   public void testContactDeletion() throws InterruptedException {
 
     //проверяем список контактов, если он не пустой, то удаляем контакт
@@ -23,16 +21,15 @@ public class ContactDeletionTests extends TestBase {
       //удаляем последний элемент из списка
       app.getContactHelper().selectContact(before.size() - 1);
       app.getContactHelper().deleteSelectedContacts();
-      app.getNavigationHelper().gotoHomePage();
+  //    app.getNavigationHelper().gotoHomePage();
 
       List<ContactData> after = app.getContactHelper().getContactList();
-
-      //проверка
-      before.remove(before.size() - 1);
-      Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-      before.sort(byId);
-      after.sort(byId);
-      Assert.assertEquals(before, after);
+            //проверка
+            before.remove(before.size() - 1);
+            Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+            before.sort(byId);
+            after.sort(byId);
+            Assert.assertEquals(before, after);
 
       //иначе сначала создаем группу и контакт, а потом удаляем:
     } else {
@@ -50,7 +47,7 @@ public class ContactDeletionTests extends TestBase {
 
       app.getContactHelper().selectContact(before.size() - 1);
       app.getContactHelper().deleteSelectedContacts();
-      app.getNavigationHelper().gotoHomePage();
+//      app.getNavigationHelper().gotoHomePage();
       List<ContactData> after = app.getContactHelper().getContactList();
 
       //проверка
