@@ -18,7 +18,7 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().initContactModification(before.size() - 1);
       ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Svetlana", "EditExist", "NovosibirskEdit", "snoskova07e@gmail.com", "7654321", null);
       app.getContactHelper().modifyContact(contact, false);
-      app.getNavigationHelper().gotoHomePage();
+      app.goTo().gotoHomePage();
 
       //Проверка
       List<ContactData> after = app.getContactHelper().getContactList();
@@ -30,18 +30,18 @@ public class ContactModificationTests extends TestBase {
       Assert.assertEquals(before, after);
 
     } else {
-      app.getNavigationHelper().gotoGroupPage();
-      if (!app.getGroupHelper().isThereAGroup()) {
-        app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+      app.goTo().groupPage();
+      if (!app.group().isThereAGroup()) {
+        app.group().create(new GroupData().withName("test1"));
       }
-      app.getNavigationHelper().gotoHomePage();
+      app.goTo().gotoHomePage();
       app.getContactHelper().createContact(new ContactData("Svetlana", "Noskova", "Novosibirsk", "snoskova07@gmail.com", "1234567", "test1"), true);
-      app.getNavigationHelper().gotoHomePage();
+      app.goTo().gotoHomePage();
       List<ContactData> before = app.getContactHelper().getContactList();
       app.getContactHelper().initContactModification(before.size() - 1);
       ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Svetlana", "EditCreated", "NovosibirskEdit", "snoskova07e@gmail.com", "7654321", null);
       app.getContactHelper().modifyContact(contact, false);
-      app.getNavigationHelper().gotoHomePage();
+      app.goTo().gotoHomePage();
 
       //Проверка
       List<ContactData> after = app.getContactHelper().getContactList();

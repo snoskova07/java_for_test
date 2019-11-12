@@ -34,15 +34,15 @@ public class ContactDeletionTests extends TestBase {
       //иначе сначала создаем группу и контакт, а потом удаляем:
     } else {
 
-      app.getNavigationHelper().gotoGroupPage();
+      app.goTo().groupPage();
       //создаем группу, если ее нет
-      if (!app.getGroupHelper().isThereAGroup()) {
-        app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+      if (!app.group().isThereAGroup()) {
+        app.group().create(new GroupData().withName("test1"));
       }
 //создаем контакт
-      app.getNavigationHelper().gotoHomePage();
+      app.goTo().gotoHomePage();
       app.getContactHelper().createContact(new ContactData("Svetlana", "Delete", "Novosibirsk", "snoskova07@gmail.com", "1231231", "test1"), true);
-      app.getNavigationHelper().gotoHomePage();
+      app.goTo().gotoHomePage();
       List<ContactData> before = app.getContactHelper().getContactList();
 
       app.getContactHelper().selectContact(before.size() - 1);
