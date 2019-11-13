@@ -6,9 +6,12 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -41,8 +44,16 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
+  }
+
   public void initContactModification(int index) {
     wd.findElements(By.xpath("//img[@title='Edit']")).get(index).click();
+  }
+
+  public void initContactModificationById(int id) {
+    wd.findElement(By.xpath("//a[@href='edit.php?id="+ id +"']")).click();
   }
 
   public void submitContactModification() {
@@ -75,8 +86,26 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContacts();
   }
 
+  public void delete(ContactData contact) throws InterruptedException {
+    selectContactById(contact.getId());
+    deleteSelectedContacts();
+  }
+
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+    for (WebElement element : elements) {
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      String lastName = element.findElement(By.xpath("./td[2]")).getText();
+      String firstName = element.findElement(By.xpath("./td[3]")).getText();
+      ContactData contact = new ContactData().withId(id).withFirstName(firstName).withLastName(lastName);
+      contacts.add(contact);
+    }
+    return contacts;
+  }
+
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
