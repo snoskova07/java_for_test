@@ -9,21 +9,23 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().groupPage();
+    if (app.group().list().size() == 0) {
+       app.group().create(new GroupData().withName("test1"));
+    }
+  }
+
   @Test
   public void testContactCreation() throws Exception {
-    app.goTo().groupPage();
-    if (!app.group().isThereAGroup()) {
-      app.group().create(new GroupData().withName("test1"));
-    }
-
-    app.goTo().gotoHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
-
-    ContactData contact = new ContactData("Svetlana", "Noskova", "Novosibirsk", "snoskova07@gmail.com", "7654321", "test1");
-    app.getContactHelper().createContact(contact, true);
-
-    app.goTo().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
+    ContactData contact = new ContactData()
+            .withFirstName("Svetlana").withLastName("Noskova").withAddress("Novosibirsk").withEmail("snoskova07@gmail.com").withPhone("7654321").withGroup("test1");
+    app.contact().create(contact, true);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
 
     //проверка
     before.add(contact);
