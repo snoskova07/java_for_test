@@ -15,15 +15,24 @@ public class GroupCreationTests extends TestBase {
     Groups before = app.group().all();
     GroupData group = new GroupData().withName("test2");
     app.group().create(group);
+    //хеширование - предварительная проверка при помощи более быстрой операции
+    assertThat(app.group().count(), equalTo(before.size() + 1));
     Groups after = app.group().all();
-    //старая проверка по размеру списка
-    assertThat(after.size(), equalTo(before.size() + 1));
-
-//проверка
-//    group.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt());
-//    before.add(group);
-//    Assert.assertEquals(before, after);
+    //проверка
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+  @Test
+  public void testBadGroupCreation() throws Exception {
+    app.goTo().groupPage();
+    Groups before = app.group().all();
+    GroupData group = new GroupData().withName("test2'");
+    app.group().create(group);
+    assertThat(app.group().count(), equalTo(before.size()));
+    Groups after = app.group().all();
+    //проверки, что группа не создается
+
+    assertThat(after, equalTo(before));
   }
 }
