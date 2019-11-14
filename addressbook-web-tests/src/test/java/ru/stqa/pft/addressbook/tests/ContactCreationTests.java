@@ -4,6 +4,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -13,7 +14,7 @@ public class ContactCreationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-       app.group().create(new GroupData().withName("test1"));
+      app.group().create(new GroupData().withName("test1"));
     }
   }
 
@@ -31,6 +32,6 @@ public class ContactCreationTests extends TestBase {
 //    before.add(contact);
 //    Assert.assertEquals(before, after);
     assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream().mapToInt((c) ->c.getId()).max().getAsInt()))));
+            before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 }
