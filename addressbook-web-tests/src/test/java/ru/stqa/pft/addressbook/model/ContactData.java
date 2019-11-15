@@ -59,13 +59,11 @@ public class ContactData {
     return this;
   }
 
-<<<<<<< HEAD
   public ContactData withPhoto(File photo) {
     this.photo = photo;
     return this;
   }
-=======
->>>>>>> parent of 7a6e17d... Лекция 6.1 Пути к файлам. Проблема с путем
+
   public int getId() {
     return id;
   }
