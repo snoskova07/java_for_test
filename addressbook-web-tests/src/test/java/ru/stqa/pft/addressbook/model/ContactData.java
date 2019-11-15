@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.model;
 
-import java.io.File;
-
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
@@ -10,7 +8,6 @@ public class ContactData {
   private String email;
   private String phone;
   private String group;
-  private File photo;
 
   public ContactData withId(int id) {
     this.id = id;
@@ -62,10 +59,13 @@ public class ContactData {
     return this;
   }
 
+<<<<<<< HEAD
   public ContactData withPhoto(File photo) {
     this.photo = photo;
     return this;
   }
+=======
+>>>>>>> parent of 7a6e17d... Лекция 6.1 Пути к файлам. Проблема с путем
   public int getId() {
     return id;
   }
@@ -104,10 +104,6 @@ public class ContactData {
 
   public String getAllEmails() {
     return allEmails;
-  }
-
-  public File getPhoto() {
-    return photo;
   }
 
   @Override
