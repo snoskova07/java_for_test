@@ -66,6 +66,7 @@ public class ContactData {
     this.photo = photo;
     return this;
   }
+
   public int getId() {
     return id;
   }
