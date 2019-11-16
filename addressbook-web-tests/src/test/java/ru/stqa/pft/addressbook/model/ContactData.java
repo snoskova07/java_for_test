@@ -8,7 +8,13 @@ public class ContactData {
   private String lastName;
   private String address;
   private String email;
-  private String phone;
+  private String home;
+  private String mobile;
+  private String work;
+  private String allPhones;
+  private String email2;
+  private String email3;
+  private String allEmails;
   private String group;
   private File photo;
 
@@ -37,8 +43,23 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withPhone(String phone) {
-    this.phone = phone;
+  public ContactData withHomePhone(String home) {
+    this.home = home;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String work) {
+    this.work = work;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
 
@@ -47,7 +68,6 @@ public class ContactData {
     return this;
   }
 
-<<<<<<< HEAD
   public ContactData withEmail2(String email2) {
     this.email2 = email2;
     return this;
@@ -68,8 +88,6 @@ public class ContactData {
     return this;
   }
 
-=======
->>>>>>> parent of e8dbd5b... Задание №11: Реализовать тест для проверки информации о контактах на главной странице
   public int getId() {
     return id;
   }
@@ -90,15 +108,26 @@ public class ContactData {
     return email;
   }
 
-  public String getPhone() {
-    return phone;
+  public String getHomePhone() {
+    return home;
+  }
+
+  public String getMobilePhone() {
+    return mobile;
+  }
+
+  public String getWorkPhone() {
+    return work;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
   public String getGroup() {
     return group;
   }
 
-<<<<<<< HEAD
   public String getEmail2() {
     return email2;
   }
@@ -115,8 +144,6 @@ public class ContactData {
     return photo;
   }
 
-=======
->>>>>>> parent of e8dbd5b... Задание №11: Реализовать тест для проверки информации о контактах на главной странице
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
