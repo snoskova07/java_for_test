@@ -48,6 +48,7 @@ public class ContactData {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   public ContactData withEmail2(String email2) {
     this.email2 = email2;
     return this;
@@ -68,6 +69,8 @@ public class ContactData {
     return this;
   }
 
+=======
+>>>>>>> parent of e8dbd5b... Задание №11: Реализовать тест для проверки информации о контактах на главной странице
 =======
 >>>>>>> parent of e8dbd5b... Задание №11: Реализовать тест для проверки информации о контактах на главной странице
   public int getId() {
@@ -99,6 +102,7 @@ public class ContactData {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   public String getEmail2() {
     return email2;
   }
@@ -115,6 +119,8 @@ public class ContactData {
     return photo;
   }
 
+=======
+>>>>>>> parent of e8dbd5b... Задание №11: Реализовать тест для проверки информации о контактах на главной странице
 =======
 >>>>>>> parent of e8dbd5b... Задание №11: Реализовать тест для проверки информации о контактах на главной странице
   @Override
