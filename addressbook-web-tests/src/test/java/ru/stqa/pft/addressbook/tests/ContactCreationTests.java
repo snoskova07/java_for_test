@@ -5,6 +5,8 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -18,7 +20,7 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
-  @Test
+  @Test (enabled = false)
   public void testContactCreation() throws Exception {
     app.goTo().homePage();
     Contacts before = app.contact().all();
@@ -32,4 +34,21 @@ public class ContactCreationTests extends TestBase {
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
+
+  @Test (enabled = false)
+  public void testContactCreationWithPhoto() throws Exception {
+    app.goTo().homePage();
+    File photo = new File(".");
+    ContactData contact = new ContactData()
+            .withFirstName("Svetlana").withLastName("Noskova").withPhoto(photo).withGroup("test1");
+    app.contact().create(contact, true);
+    app.goTo().homePage();
+  }
+
+  @Test
+  public void testCurrentDir() throws Exception {
+File currentDir = new File(".");
+    System.out.println("dir "+ currentDir.getAbsolutePath());
+  }
+
 }
