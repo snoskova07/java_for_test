@@ -35,20 +35,13 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
-  @Test (enabled = false)
+  @Test
   public void testContactCreationWithPhoto() throws Exception {
     app.goTo().homePage();
-    File photo = new File(".");
+    File photo = new File("src/test/resources/stru.jpg");
     ContactData contact = new ContactData()
             .withFirstName("Svetlana").withLastName("Noskova").withPhoto(photo).withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().homePage();
   }
-
-  @Test
-  public void testCurrentDir() throws Exception {
-File currentDir = new File(".");
-    System.out.println("dir "+ currentDir.getAbsolutePath());
-  }
-
 }
