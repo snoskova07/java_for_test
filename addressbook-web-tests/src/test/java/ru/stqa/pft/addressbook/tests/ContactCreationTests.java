@@ -40,6 +40,8 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
+//    System.out.println(new File(".").getAbsolutePath());
+
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
       String json = "";
       String line = reader.readLine();
@@ -82,7 +84,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().homePage();
     File photo = new File("src/test/resources/stru.jpg");
     ContactData contact = new ContactData()
-            .withFirstName("Svetlana").withLastName("Noskova").withPhoto(photo).withGroup("test1");
+            .withFirstName("Svetlana").withLastName("Noskova").withPhoto(photo).withGroup("test 1");
     app.contact().create(contact, true);
     app.goTo().homePage();
   }
