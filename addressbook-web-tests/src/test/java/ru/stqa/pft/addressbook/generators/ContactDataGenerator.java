@@ -16,82 +16,81 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDataGenerator {
-    @Parameter(names = "-c", description = "Contact count")
-    public int count;
+  @Parameter(names = "-c", description = "Contact count")
+  public int count;
 
-    @Parameter(names = "-f", description = "Target file")
-    public String file;
+  @Parameter(names = "-f", description = "Target file")
+  public String file;
 
-    @Parameter(names = "-d", description = "Data format")
-    public String format;
+  @Parameter(names = "-d", description = "Data format")
+  public String format;
 
-    public static void main(String[] args) throws IOException {
-        ContactDataGenerator generator = new ContactDataGenerator();
-        JCommander jCommander  = new JCommander(generator);
-        try {
-            jCommander.parse(args);
-        } catch (ParameterException ex) {
-            jCommander.usage();
-            return;
-        }
-        generator.run();
+  public static void main(String[] args) throws IOException {
+    ContactDataGenerator generator = new ContactDataGenerator();
+    JCommander jCommander = new JCommander(generator);
+    try {
+      jCommander.parse(args);
+    } catch (ParameterException ex) {
+      jCommander.usage();
+      return;
     }
+    generator.run();
+  }
 
-    private void run() throws IOException {
-        List<ContactData> contacts = generateContacts(count);
-        if (format.equals("csv")) {
-            saveAsCsv(contacts, new File(file));
-        } else if (format.equals("xml")) {
-            saveAsXml(contacts, new File(file));
-        } else if (format.equals("json")) {
-            saveAsJson(contacts, new File(file));
-        }
-        else {
-            System.out.println("Unrecognized file format" + format);
-        }
+  private void run() throws IOException {
+    List<ContactData> contacts = generateContacts(count);
+    if (format.equals("csv")) {
+      saveAsCsv(contacts, new File(file));
+    } else if (format.equals("xml")) {
+      saveAsXml(contacts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(contacts, new File(file));
+    } else {
+      System.out.println("Unrecognized file format" + format);
     }
+  }
 
-    private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-        String json = gson.toJson(contacts);
-        Writer writer  = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+  private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    String json = gson.toJson(contacts);
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
     }
+  }
 
-    private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
-        XStream xstream = new XStream();
-        xstream.processAnnotations(ContactData.class);
-        String xml = xstream.toXML(contacts);
-        Writer writer  = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+  private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
+    XStream xstream = new XStream();
+    xstream.processAnnotations(ContactData.class);
+    String xml = xstream.toXML(contacts);
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(xml);
     }
+  }
 
-    private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-        System.out.println(new File(".").getAbsolutePath());
-        Writer writer  = new FileWriter(file);
-        for (ContactData contact: contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getAddress()));
-        }
-        writer.close();
+  private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
+    System.out.println(new File(".").getAbsolutePath());
+    try (Writer writer = new FileWriter(file)) {
+      for (ContactData contact : contacts) {
+        writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getAddress()));
+      }
     }
+  }
 
-    private List<ContactData> generateContacts(int count) {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        for (int i=0; i<count; i++ ) {
-            contacts.add(new ContactData()
-                    .withFirstName(String.format("Svetlana %s", i))
-                    .withLastName(String.format("Noskova %s", i))
-                    .withAddress(String.format("Novosibirsk %s", i))
-                    .withEmail(String.format("email1%s@mail.com", i))
-                    .withEmail2(String.format("email2%s@mail.com", i))
-                    .withEmail3(String.format("email3%s@mail.com", i))
-                    .withHomePhone(String.format("111%s", i))
-                    .withMobilePhone(String.format("222%s", i))
-                    .withWorkPhone(String.format("333%s", i))
-                    .withGroup(String.format("test %s", i)));
-        }
-        return contacts;
+  private List<ContactData> generateContacts(int count) {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    for (int i = 0; i < count; i++) {
+      contacts.add(new ContactData()
+              .withFirstName(String.format("Svetlana %s", i))
+              .withLastName(String.format("Noskova %s", i))
+              .withAddress(String.format("Novosibirsk %s", i))
+              .withEmail(String.format("email1%s@mail.com", i))
+              .withEmail2(String.format("email2%s@mail.com", i))
+              .withEmail3(String.format("email3%s@mail.com", i))
+              .withHomePhone(String.format("111%s", i))
+              .withMobilePhone(String.format("222%s", i))
+              .withWorkPhone(String.format("333%s", i))
+              .withGroup(String.format("test %s", i)));
     }
+    return contacts;
+  }
 }
