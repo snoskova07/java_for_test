@@ -24,7 +24,7 @@ public class ContactPhoneTests extends TestBase {
       }
       app.goTo().homePage();
       ContactData contact = new ContactData()
-              .withFirstName("Svetlana").withLastName("Noskova").withAddress("Novosibirsk").withEmail("snoskova07@gmail.com").withHomePhone("+7 11111").withMobilePhone("222").withWorkPhone("3333").withGroup("test1");
+              .withFirstName("Svetlana").withLastName("Noskova").withAddress("Novosibirsk, Vil7-164").withEmail("snoskova07@gmail.com").withEmail2("m1@mail.qq").withEmail3("m2@mail.qq").withHomePhone("+7 11111").withMobilePhone("222").withWorkPhone("3333").withGroup("test1");
       app.contact().create(contact, true);
       app.goTo().homePage();
     }
@@ -36,17 +36,38 @@ public class ContactPhoneTests extends TestBase {
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    assertThat(contact.getAddress(), equalTo(reformAddress(contactInfoFromEditForm)));
   }
 
   private String mergePhones(ContactData contact) {
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
             .stream().filter((s) -> !s.equals(""))
-            .map(ContactPhoneTests::cleaned)
+            .map(ContactPhoneTests::cleanedPhone)
             .collect(Collectors.joining("\n"));
   }
 
-  public static String cleaned(String phone) {
+  private String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+            .stream().filter((s) -> !s.equals(""))
+            .map(ContactPhoneTests::cleanedEmail)
+            .collect(Collectors.joining("\n"));
+  }
+
+  public static String cleanedPhone(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     // \\s - пробел, таб
   }
+
+  public static String cleanedEmail(String email) {
+    return email.replaceAll("\\s", "").replaceAll("[-()]", "");
+    // \\s - пробел, таб
+  }
+
+  private String reformAddress(ContactData contact) {
+    return Arrays.asList(contact.getAddress())
+            .stream().filter((s) -> !s.equals(""))
+            .collect(Collectors.joining("\n"));
+  }
+
 }

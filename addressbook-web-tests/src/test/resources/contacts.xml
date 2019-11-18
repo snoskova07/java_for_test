@@ -1,0 +1,38 @@
+<list>
+  <contact>
+    <firstName>Svetlana 0</firstName>
+    <lastName>Noskova 0</lastName>
+    <address>Novosibirsk 0</address>
+    <email>email10@mail.com</email>
+    <home>1110</home>
+    <mobile>2220</mobile>
+    <work>3330</work>
+    <email2>email20@mail.com</email2>
+    <email3>email30@mail.com</email3>
+    <group>test 0</group>
+  </contact>
+  <contact>
+    <firstName>Svetlana 1</firstName>
+    <lastName>Noskova 1</lastName>
+    <address>Novosibirsk 1</address>
+    <email>email11@mail.com</email>
+    <home>1111</home>
+    <mobile>2221</mobile>
+    <work>3331</work>
+    <email2>email21@mail.com</email2>
+    <email3>email31@mail.com</email3>
+    <group>test 1</group>
+  </contact>
+  <contact>
+    <firstName>Svetlana 2</firstName>
+    <lastName>Noskova 2</lastName>
+    <address>Novosibirsk 2</address>
+    <email>email12@mail.com</email>
+    <home>1112</home>
+    <mobile>2222</mobile>
+    <work>3332</work>
+    <email2>email22@mail.com</email2>
+    <email3>email32@mail.com</email3>
+    <group>test 2</group>
+  </contact>
+</list>
