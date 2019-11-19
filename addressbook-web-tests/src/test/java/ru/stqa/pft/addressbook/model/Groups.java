@@ -32,5 +32,4 @@ private Set<GroupData> delegate;
     groups.remove(group);
     return groups;
   }
-
 }

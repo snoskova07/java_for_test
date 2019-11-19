@@ -32,7 +32,6 @@ public class ContactCreationTests extends TestBase {
       }
       XStream xstream = new XStream();
       xstream.processAnnotations(ContactData.class);
-
       List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
       return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
@@ -41,7 +40,6 @@ public class ContactCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
 //    System.out.println(new File(".").getAbsolutePath());
-
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
       String json = "";
       String line = reader.readLine();
