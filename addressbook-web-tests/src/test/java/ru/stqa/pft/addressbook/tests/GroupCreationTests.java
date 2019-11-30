@@ -6,7 +6,6 @@ import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.GroupData;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Groups;
-
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
@@ -19,13 +18,10 @@ public class GroupCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
-//      List<Object[]> list = new ArrayList<Object[]>();
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))) {
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
-        //    String[] split = line.split(";");
-        //    list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
         xml += line;
         line = reader.readLine();
       }
@@ -34,7 +30,6 @@ public class GroupCreationTests extends TestBase {
 
       List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
       return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
-      // return list.iterator();
     }
   }
 
