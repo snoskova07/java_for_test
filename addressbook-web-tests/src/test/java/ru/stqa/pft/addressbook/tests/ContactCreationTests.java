@@ -3,8 +3,10 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
-import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -63,12 +65,12 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) throws Exception {
-    app.goTo().homePage();
     Contacts before = app.db().contacts();
+    app.goTo().homePage();
     app.contact().create(contact, true);
     app.goTo().homePage();
-    assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }

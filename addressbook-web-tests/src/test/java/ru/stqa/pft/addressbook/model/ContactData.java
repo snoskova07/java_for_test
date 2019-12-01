@@ -10,7 +10,6 @@ import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
-
 @Entity
 @Table(name = "addressbook")
 public class ContactData {
@@ -63,29 +62,6 @@ public class ContactData {
   @Column(name="photo")
   @Type(type="text")
   private String photo;
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) &&
-            Objects.equals(address, that.address) &&
-            Objects.equals(email, that.email) &&
-            Objects.equals(home, that.home) &&
-            Objects.equals(mobile, that.mobile) &&
-            Objects.equals(work, that.work) &&
-            Objects.equals(email2, that.email2) &&
-            Objects.equals(email3, that.email3) &&
-            Objects.equals(photo, that.photo);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstName, lastName, address, email, home, mobile, work, email2, email3, photo);
-  }
 
   public ContactData withId(int id) {
     this.id = id;
@@ -210,7 +186,11 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo != null) {
+      return new File(photo);
+    } else {
+      return null;
+    }
   }
 
   @Override
@@ -221,4 +201,28 @@ public class ContactData {
             ", lastName='" + lastName + '\'' +
             '}';
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(home, that.home) &&
+            Objects.equals(mobile, that.mobile) &&
+            Objects.equals(work, that.work) &&
+            Objects.equals(email2, that.email2) &&
+            Objects.equals(email3, that.email3) &&
+            Objects.equals(photo, that.photo);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, lastName, address, email, home, mobile, work, email2, email3, photo);
+  }
+
 }

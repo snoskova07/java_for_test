@@ -10,29 +10,5 @@
     "email2": "email20@mail.com",
     "email3": "email30@mail.com",
     "group": "test 0"
-  },
-  {
-    "firstName": "Svetlana 1",
-    "lastName": "Noskova 1",
-    "address": "Novosibirsk 1",
-    "email": "email11@mail.com",
-    "home": "1111",
-    "mobile": "2221",
-    "work": "3331",
-    "email2": "email21@mail.com",
-    "email3": "email31@mail.com",
-    "group": "test 1"
-  },
-  {
-    "firstName": "Svetlana 2",
-    "lastName": "Noskova 2",
-    "address": "Novosibirsk 2",
-    "email": "email12@mail.com",
-    "home": "1112",
-    "mobile": "2222",
-    "work": "3332",
-    "email2": "email22@mail.com",
-    "email3": "email32@mail.com",
-    "group": "test 2"
   }
 ]

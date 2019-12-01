@@ -15,11 +15,11 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePrecondition() {
-    if (app.contact().all().size() != 0) {
+    if (app.db().contacts().size() != 0) {
       return;
     } else {
       app.goTo().groupPage();
-      if (app.group().all().size() == 0) {
+      if (app.db().groups().size() == 0) {
         app.group().create(new GroupData().withName("test1"));
       }
       app.goTo().homePage();
@@ -32,21 +32,15 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
     app.contact().initContactModificationById(modifiedContact.getId());
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId()).withFirstName("Svetlana").withLastName("Modify").withAddress("Novosibirsk").withEmail("snoskova07@gmail.com").withHomePhone("7654321");
     app.contact().modify(contact, false);
     app.goTo().homePage();
-    assertThat(app.contact().count(), equalTo(before.size()));
-
-    //Проверка
-    Contacts after = app.contact().all();
-//    before.remove(modifiedContact);
-//    before.add(contact);
-//    Assert.assertEquals(before, after);
-
+    assertThat(app.db().contacts().size(), equalTo(before.size()));
+    Contacts after = app.db().contacts();
     MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 }
