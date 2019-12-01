@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Gradle: org.hibernate:hibernate-core:5.4.9.Final">
     <CLASSES>
-      <root url="file://$APPLICATION_HOME_DIR$/jbr/bin/Could not resolve org.hibernate:hibernate-core:5.4.9.Final." />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.4.9.Final/6a7efbbe889e9644b163f5cc03936b7e2b360293/hibernate-core-5.4.9.Final.jar!/" />
     </CLASSES>
     <JAVADOC />
