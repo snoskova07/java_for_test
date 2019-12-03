@@ -17,11 +17,9 @@ public class ContactDeletionTests extends TestBase {
       return;
     } else {
       app.goTo().groupPage();
-      //если гуппы нет - создаем:
       if (app.db().groups().size() == 0) {
         app.group().create(new GroupData().withName("test1"));
       }
-      //создаем контакт
       app.goTo().homePage();
       ContactData contact = new ContactData()
               .withFirstName("Svetlana").withLastName("Delete").withAddress("Novosibirsk").withEmail("snoskova07@gmail.com").withHomePhone("7654321").withGroup("test1");

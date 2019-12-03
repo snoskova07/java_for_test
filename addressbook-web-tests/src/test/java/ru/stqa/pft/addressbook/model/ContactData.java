@@ -59,8 +59,7 @@ public class ContactData {
   @Transient
   private String group;
   @Expose
-  @Column(name="photo")
-  @Type(type="text")
+  @Transient
   private String photo;
 
   public ContactData withId(int id) {
@@ -212,17 +211,12 @@ public class ContactData {
             Objects.equals(lastName, that.lastName) &&
             Objects.equals(address, that.address) &&
             Objects.equals(email, that.email) &&
-            Objects.equals(home, that.home) &&
-            Objects.equals(mobile, that.mobile) &&
-            Objects.equals(work, that.work) &&
-            Objects.equals(email2, that.email2) &&
-            Objects.equals(email3, that.email3) &&
-            Objects.equals(photo, that.photo);
+            Objects.equals(home, that.home);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, address, email, home, mobile, work, email2, email3, photo);
+    return Objects.hash(id, firstName, lastName, address, email, home);
   }
 
 }
