@@ -16,3 +16,4 @@ gradle-app.setting
 addressbook-web-tests/test-20191130T134928.log
 *.log
 .idea/misc.xml
+addressbook-web-tests/.idea/uiDesigner.xml

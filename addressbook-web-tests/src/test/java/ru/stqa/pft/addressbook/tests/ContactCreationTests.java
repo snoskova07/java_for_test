@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -65,6 +66,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) throws Exception {
+    Groups groups = app.db().groups();
     Contacts before = app.db().contacts();
     app.goTo().homePage();
     app.contact().create(contact, true);
@@ -77,10 +79,11 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreationWithPhoto() throws Exception {
+    Groups groups = app.db().groups();
     app.goTo().homePage();
     File photo = new File("src/test/resources/stru.jpg");
     ContactData contact = new ContactData()
-            .withFirstName("Svetlana").withLastName("Noskova").withPhoto(photo).withGroup("test 1");
+            .withFirstName("Svetlana").withLastName("Noskova").withPhoto(photo).inGroup(groups.iterator().next());
     app.contact().create(contact, true);
     app.goTo().homePage();
   }

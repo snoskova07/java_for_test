@@ -88,8 +88,8 @@ public class ContactDataGenerator {
               .withEmail3(String.format("email3%s@mail.com", i))
               .withHomePhone(String.format("111%s", i))
               .withMobilePhone(String.format("222%s", i))
-              .withWorkPhone(String.format("333%s", i))
-              .withGroup(String.format("test %s", i)));
+              .withWorkPhone(String.format("333%s", i)));
+       //       .withGroup(String.format("test %s", i)));
     }
     return contacts;
   }

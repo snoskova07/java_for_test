@@ -23,9 +23,9 @@ public class ContactPhoneTests extends TestBase {
         app.group().create(new GroupData().withName("test1"));
       }
       app.goTo().homePage();
-      ContactData contact = new ContactData()
-              .withFirstName("Svetlana").withLastName("Noskova").withAddress("Novosibirsk, Vil7-164").withEmail("snoskova07@gmail.com").withEmail2("m1@mail.qq").withEmail3("m2@mail.qq").withHomePhone("+7 11111").withMobilePhone("222").withWorkPhone("3333").withGroup("test1");
-      app.contact().create(contact, true);
+ //     ContactData contact = new ContactData()
+ //             .withFirstName("Svetlana").withLastName("Noskova").withAddress("Novosibirsk, Vil7-164").withEmail("snoskova07@gmail.com").withEmail2("m1@mail.qq").withEmail3("m2@mail.qq").withHomePhone("+7 11111").withMobilePhone("222").withWorkPhone("3333").withGroup("test1");
+ //     app.contact().create(contact, true);
       app.goTo().homePage();
     }
   }
