@@ -25,20 +25,16 @@ public class HttpSession {
     }
 
     public boolean login(String username, String password) throws IOException {
-        HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login_page.php");
-        List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("username", username));
-        params.add(new BasicNameValuePair("return", "login_password_page.php"));
-        post.setEntity(new UrlEncodedFormEntity(params));
-        CloseableHttpResponse response = httpclient.execute(post);
-
-//        params.add(new BasicNameValuePair("password", password));
- //       params.add(new BasicNameValuePair("secure_session", "on"));
- //       params.add(new BasicNameValuePair("return", "index.php"));
- //       post.setEntity(new UrlEncodedFormEntity(params));
-//        CloseableHttpResponse response = httpclient.execute(post);
+        HttpPost postLogin = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
+        List<NameValuePair> param = new ArrayList<>();
+        param.add(new BasicNameValuePair("username", username));
+        param.add(new BasicNameValuePair("password", password));
+        param.add(new BasicNameValuePair("secure_session", "on"));
+        param.add(new BasicNameValuePair("return", "index.php"));
+        postLogin.setEntity(new UrlEncodedFormEntity(param));
+        CloseableHttpResponse response = httpclient.execute(postLogin);
         String body = getTextFrom(response);
-        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+        return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
     }
 
     private String getTextFrom (CloseableHttpResponse response) throws IOException {
@@ -53,7 +49,7 @@ public class HttpSession {
         HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
         CloseableHttpResponse response = httpclient.execute(get);
         String body = getTextFrom(response);
-        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+        return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
     }
 
 }
