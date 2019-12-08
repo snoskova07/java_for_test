@@ -34,11 +34,21 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
   }
 
   public void stop() {
     wd.quit();
+  }
+
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
+  public String getProperty(String key) throws IOException {
+//    String target = System.getProperty("target", "local");
+//    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    return properties.getProperty(key);
   }
 }
