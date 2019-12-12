@@ -16,31 +16,41 @@ public class RemoveContactFromGroupTests extends TestBase {
   public void ensurePrecondition() {
     Groups groups = app.db().groups();
     Contacts contacts = app.db().contacts();
-    if (contacts.size() != 0) {
-      return;
-    } else {
+    if (groups.size() == 0) {
       app.goTo().groupPage();
-      if (groups.size() == 0) {
-        app.group().create(new GroupData().withName("test 0"));
-      }
+      app.group().create(new GroupData().withName("test 0"));
       app.goTo().homePage();
+    }
+
+    if (contacts.size() == 0) {
       ContactData contact = new ContactData()
               .withFirstName("Svetlana").withLastName("RemoveFromGroup").inGroup(groups.iterator().next());
       app.contact().create(contact, true);
       app.goTo().homePage();
     }
-  }
+      GroupData selectedGroup = groups.iterator().next();
+      app.contact().filterByGroup(selectedGroup.getId());
+      if (app.contact().emptyGroup()) {
+        app.contact().selectAllGroup();
+        Contacts contactsUI = app.contact().all();
+        ContactData selectedContactUI = contactsUI.iterator().next();
+        app.contact().addContactToGroup(selectedContactUI.getId(), selectedGroup.getId());
+        app.goTo().homePage();
+      }
+    }
 
   @Test
   public void testRemoveContactFromGroup() {
-    Contacts contactWithGroup = app.db().contacts();
     Groups group = app.db().groups();
-    ContactData selectedContact = contactWithGroup.iterator().next();
     GroupData selectedGroup = group.iterator().next();
-    app.goTo().homePage();
+    Contacts contactsUI = app.contact().all();
+    Contacts contactBefore = app.db().contacts();
+    ContactData contactWithGroup = contactBefore.iterator().next();
+    ContactData selectedContact = contactsUI.iterator().next();
     app.contact().removeContactFromGroup(selectedContact.getId(), selectedGroup.getId());
+
     Contacts contactAfter = app.db().contacts();
     ContactData contactWithoutGroup = contactAfter.iterator().next();
-    assertThat(contactWithoutGroup, equalTo(selectedContact.removeGroup(group.iterator().next())));
+    assertThat(contactWithGroup, equalTo(contactWithoutGroup.inGroup(group.iterator().next())));
   }
 }
