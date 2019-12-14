@@ -1,13 +1,12 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.WebElement;
-import ru.stqa.pft.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.security.acl.Group;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -98,4 +97,16 @@ public class GroupHelper extends HelperBase {
     }
     return new Groups (groupCache);
   }
+
+  public GroupData groupsWithAddedContacts(Groups groups) {
+    for (GroupData group : groups) {
+      Set<ContactData> contInGroup = group.getContacts();
+      if (contInGroup.size() > 0) {
+        return group;
+      }
+    }
+    return null;
+  }
+
+
 }

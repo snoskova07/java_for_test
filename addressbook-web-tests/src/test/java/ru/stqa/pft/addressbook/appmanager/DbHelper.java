@@ -16,7 +16,7 @@ public class DbHelper {
 
     private final SessionFactory sessionFactory;
 
-    public  DbHelper() {
+    public DbHelper() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
@@ -26,7 +26,7 @@ public class DbHelper {
     public Groups groups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupData> result = session.createQuery( "from GroupData" ).list();
+        List<GroupData> result = session.createQuery("from GroupData").list();
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
@@ -35,19 +35,29 @@ public class DbHelper {
     public Contacts contacts() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
+        List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
     }
 
-    public Contacts contactsInGroup() {
+    public Contacts getContactById(int contactId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
+        List<ContactData> result = session.createQuery("from ContactData where id = " + contactId).list();
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
     }
 
+    public Groups getGroupById(int groupId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<GroupData> result = session.createQuery("from GroupData where id = " + groupId).list();
+        session.getTransaction().commit();
+        session.close();
+        return new Groups(result);
+    }
 }
+
+

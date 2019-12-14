@@ -7,8 +7,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -169,9 +171,9 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//select[@name='to_group']/option[@value='" + groupId + "'])"));
     }
 
-    public boolean emptyNoneContactList() {
+    public boolean isEmptyNoneList() {
         selectNoneGroup();
-        boolean bool = emptyGroup();
+        boolean bool = isEmptyGroup();
         selectAllGroup();
         return bool;
     }
@@ -184,8 +186,27 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//select[@name='group']/option[text()='[all]'])"));
     }
 
-
-    public boolean emptyGroup() {
+    public boolean isEmptyGroup() {
        return isElementPresent(By.xpath("//span[@id='search_count'][text()='0']"));
+    }
+
+    public ContactData findContactWithGroup(Contacts contacts) {
+        for (ContactData contact : contacts) {
+            Set<GroupData> contInGroup = contact.getGroups();
+            if (contInGroup.size() > 0) {
+                return contact;
+            }
+        }
+        return null;
+    }
+
+    public ContactData findContactWithoutGroup(Contacts contacts) {
+        for (ContactData contact : contacts) {
+            Set<GroupData> contInGroup = contact.getGroups();
+            if (contInGroup.size() == 0) {
+                return contact;
+            }
+        }
+        return null;
     }
 }
