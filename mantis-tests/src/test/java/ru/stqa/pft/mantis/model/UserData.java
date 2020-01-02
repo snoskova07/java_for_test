@@ -23,6 +23,9 @@ public class UserData {
     @Expose
     @Column(name="password")
     private String password;
+    @Expose
+    @Column(name="email")
+    private String email;
 
     public int getId() {
         return id;
@@ -36,6 +39,15 @@ public class UserData {
         return password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public UserData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     public UserData withId(int id) {
         this.id = id;
         return this;
@@ -45,23 +57,24 @@ public class UserData {
         return this;
     }
 
+    public UserData withPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserData userData = (UserData) o;
-        return id == userData.id &&
-                Objects.equals(username, userData.username) &&
-                Objects.equals(password, userData.password);
+        return Objects.equals(username, userData.username) &&
+                Objects.equals(password, userData.password) &&
+                Objects.equals(email, userData.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password);
+        return Objects.hash(username, password, email);
     }
 
-    public UserData withPassword(String password) {
-        this.password = password;
-        return this;
-    }
 }

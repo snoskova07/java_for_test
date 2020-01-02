@@ -10,11 +10,12 @@ import ru.stqa.pft.mantis.model.Users;
 
 import java.util.List;
 
-public class DbHelper {
+public class DbHelper extends HelperBase {
 
     private final SessionFactory sessionFactory;
 
-    public DbHelper() {
+    public DbHelper(ApplicationManager app) {
+        super(app);
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();

@@ -12,4 +12,13 @@ public class NavigationHelper extends HelperBase{
         click((By.xpath("//a[text()='Manage']")));
         click((By.xpath("//a[text()='Manage Users']")));
     }
+
+    public void selectUser(String username) {
+        click((By.xpath("//a[text()='" + username + "']")));
+
+    }
+
+    public void resetPassword() {
+        click((By.xpath("//input[@value='Reset Password']")));
+    }
 }
