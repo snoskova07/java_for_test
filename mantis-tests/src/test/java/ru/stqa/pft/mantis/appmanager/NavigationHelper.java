@@ -21,4 +21,9 @@ public class NavigationHelper extends HelperBase{
     public void resetPassword() {
         click((By.xpath("//input[@value='Reset Password']")));
     }
+
+    public void logout() {
+        click((By.xpath("//a[text()='Logout']")));
+    }
+
 }
