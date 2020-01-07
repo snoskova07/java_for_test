@@ -34,10 +34,10 @@ public class SoapTests extends TestBase {
 
     @Test
     public void testGetIssue() throws IOException, ServiceException {
+        skipIfNotFixed(0000001);
         Issue issue = app.soap().getIssue(0000001);
         if (isIssueOpen(0000001)) {
             System.out.println(issue.getStatus().getName());
         }
     }
-
 }
