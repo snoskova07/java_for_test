@@ -28,7 +28,7 @@ public class RestAssuredTests  {
     }
 
     private Set<Issue> getIssues(){
-        String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json").asString();
+        String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json?limit=500").asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
@@ -38,7 +38,7 @@ public class RestAssuredTests  {
         String json = RestAssured.given()
                 .parameter("subject", newIssue.getSubject())
                 .parameter("description", newIssue.getDescription())
-                .post("https://bugify.stqa.ru/api/issues.json").asString();
+                .post("https://bugify.stqa.ru/api/issues.json?limit=500").asString();
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
     }
