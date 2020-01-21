@@ -22,7 +22,7 @@ public class TestBase {
     }
 
     public boolean isIssueOpen(int issueId) throws IOException {
-        String status = getIssue(issueId);
+        String status = getIssueStatus(issueId);
         if (status.equals("Resolved")) {
             return false;
         }
@@ -30,14 +30,14 @@ public class TestBase {
     }
 
     public Set<Issue> getIssues() throws IOException {
-        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json")).returnContent().toString();
+        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json?limit=500")).returnContent().toString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
     }
 
-    public String getIssue(int issueId) throws IOException {
-        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues/" + issueId + ".json")).returnContent().asString();
+    public String getIssueStatus(int issueId) throws IOException {
+        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues/" + issueId + ".json?limit=500")).returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         Set<Issue> issue = new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
@@ -50,7 +50,7 @@ public class TestBase {
     }
 
     public int createIssue(Issue newIssue) throws IOException {
-        String json = getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json")
+        String json = getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json?limit=500")
                 .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
                         new BasicNameValuePair("description", newIssue.getDescription())))
                 .returnContent().asString();

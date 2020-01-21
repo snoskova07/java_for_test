@@ -20,7 +20,7 @@ public class RestAssuredTests  {
     @Test
     public void testCreateIssue(){
         Set<Issue> oldIssues = getIssues();
-        Issue newIssue = new Issue().withSubject("1Test Issue").withDescription("1New Test Issue");
+        Issue newIssue = new Issue().withSubject("1Test Issue").withDescription("1New Test Issue").withStatus("Open");
         int issueId = createIssue(newIssue);
         Set<Issue> newIssues = getIssues();
         oldIssues.add(newIssue.withId(issueId));
